@@ -1,3 +1,4 @@
 name: $pluginName
 version: $version
 main: com.github.noonmaru.kotlin.KotlinPlugin
+api-version: '1.13'
