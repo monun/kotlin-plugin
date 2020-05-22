@@ -35,7 +35,7 @@ tasks {
     }
 	
     create<Copy>("distJar") {
-        from(jar)
+        from(shadowJar)
         into("W:\\Servers\\parkour-maker\\plugins")
     }
 }
