@@ -1,12 +1,10 @@
-import kotlin.NullPointerException
-
 plugins {
     kotlin("jvm") version "1.3.72"
     id("com.github.johnrengelman.shadow") version "5.2.0"
 }
 
-group = properties["pluginName"]?: throw NullPointerException("Group cannot be null")
-version = properties["pluginVersion"]?: throw NullPointerException("Version cannot be null")
+group = requireNotNull(properties["pluginName"]) { "Gruop is undefined in properties" }
+version = requireNotNull(properties["pluginVersion"]) { "Version is undefined in properties" }
 
 repositories {
     mavenCentral()
@@ -23,19 +21,19 @@ tasks {
     compileKotlin {
         kotlinOptions.jvmTarget = "1.8"
     }
-	
+
     processResources {
         filesMatching("**/*.yml") {
             expand(project.properties)
         }
     }
-	
+
     shadowJar {
         archiveClassifier.set("lib")
     }
-	
-    create<Copy>("distJar") {
-        from(shadowJar)
-        into("W:\\Servers\\parkour-maker\\plugins")
-    }
+
+//    create<Copy>("distJar") {
+//        from(shadowJar)
+//        into("W:\\Servers\\test\\plugins")
+//    }
 }

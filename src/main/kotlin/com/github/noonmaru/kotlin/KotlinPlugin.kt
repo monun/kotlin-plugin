@@ -3,7 +3,7 @@ package com.github.noonmaru.kotlin
 import org.bukkit.plugin.java.JavaPlugin
 
 /**
- * @author Nemo
+ * @author Noonmaru
  */
 class KotlinPlugin : JavaPlugin() {
     override fun onEnable() {
