@@ -1,45 +1,41 @@
+import kotlin.NullPointerException
+
 plugins {
-    kotlin("jvm") version "1.3.70"
+    kotlin("jvm") version "1.3.72"
     id("com.github.johnrengelman.shadow") version "5.2.0"
 }
 
-group = properties["pluginName"]!!
-version = properties["pluginVersion"]!!
+group = properties["pluginName"]?: throw NullPointerException("Group cannot be null")
+version = properties["pluginVersion"]?: throw NullPointerException("Version cannot be null")
 
 repositories {
     mavenCentral()
-    maven(url = "https://papermc.io/repo/repository/maven-public/") //paper
-    maven(url = "https://jitpack.io/") //tap, psychic
+    maven("https://papermc.io/repo/repository/maven-public/")
+    maven("https://jitpack.io/")
 }
 
 dependencies {
-    compile(kotlin("stdlib-jdk8")) //kotlin
-    compileOnly("com.destroystokyo.paper:paper-api:1.13.2-R0.1-SNAPSHOT") //paper
+    implementation(kotlin("stdlib-jdk8"))
+    compileOnly("com.destroystokyo.paper:paper-api:1.13.2-R0.1-SNAPSHOT")
 }
 
 tasks {
-    compileJava {
-        options.encoding = "UTF-8"
-    }
-    javadoc {
-        options.encoding = "UTF-8"
-    }
     compileKotlin {
         kotlinOptions.jvmTarget = "1.8"
     }
-    compileTestKotlin {
-        kotlinOptions.jvmTarget = "1.8"
-    }
+	
     processResources {
         filesMatching("**/*.yml") {
             expand(project.properties)
         }
     }
+	
     shadowJar {
         archiveClassifier.set("lib")
     }
-//    create<Copy>("distJar") {
-//        from(jar)
-//        into("W:\\Servers\\distServer\\plugins")
-//    }
+	
+    create<Copy>("distJar") {
+        from(shadowJar)
+        into("W:\\Servers\\parkour-maker\\plugins")
+    }
 }
