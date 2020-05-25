@@ -3,7 +3,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "5.2.0"
 }
 
-group = requireNotNull(properties["pluginName"]) { "Gruop is undefined in properties" }
+group = requireNotNull(properties["pluginName"]) { "Group is undefined in properties" }
 version = requireNotNull(properties["pluginVersion"]) { "Version is undefined in properties" }
 
 repositories {
@@ -32,8 +32,8 @@ tasks {
         archiveClassifier.set("lib")
     }
 
-//    create<Copy>("distJar") {
-//        from(shadowJar)
-//        into("W:\\Servers\\test\\plugins")
-//    }
+    create<Copy>("distJar") {
+        from(shadowJar)
+        into("W:\\Servers\\sample\\plugins")
+    }
 }
