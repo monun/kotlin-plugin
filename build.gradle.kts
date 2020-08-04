@@ -14,6 +14,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
+    implementation(kotlin("reflect"))
     compileOnly("com.destroystokyo.paper:paper-api:1.13.2-R0.1-SNAPSHOT")
 }
 
@@ -34,6 +35,6 @@ tasks {
 
     create<Copy>("distJar") {
         from(shadowJar)
-        into("W:\\Servers\\sample\\plugins")
+        into("W:\\Servers\\psychics-1.16.1\\plugins")
     }
 }
