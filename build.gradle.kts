@@ -31,18 +31,6 @@ tasks {
     }
 
     shadowJar {
-        if (project.hasProperty("withCoroutines")) {
-            archiveClassifier.set("coroutines-lib")
-        } else {
-            archiveClassifier.set("lib")
-            dependencies {
-                exclude("*kotlinx-coroutines-core*")
-            }
-        }
-    }
-
-    create<Copy>("distJar") {
-        from(shadowJar)
-        into("W:\\Servers\\psychics-1.16.1\\plugins")
+        archiveClassifier.set("lib")
     }
 }

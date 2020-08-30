@@ -8,10 +8,3 @@
 depend: [kotlin]
 ...
 ```
-
-**To include coroutines library, add the project property when executing tasks.**
-```
-gradlew shadowJar -PwithCoroutines
-... or
-gradlew distJar -PwithCoroutines
-```
