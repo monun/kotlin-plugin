@@ -23,14 +23,12 @@ tasks {
     compileKotlin {
         kotlinOptions.jvmTarget = "1.8"
     }
-
     processResources {
         filesMatching("**/*.yml") {
             expand(project.properties)
         }
     }
-
     shadowJar {
-        archiveClassifier.set("lib")
+        archiveClassifier.set("")
     }
 }
