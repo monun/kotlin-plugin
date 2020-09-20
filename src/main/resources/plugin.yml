@@ -2,3 +2,6 @@ name: $pluginName
 main: $pluginMain
 version: $version
 api-version: '1.13'
+commands:
+  kotlin:
+    permission: kotlin.command

@@ -7,12 +7,15 @@ repositories {
     maven("https://repo.maven.apache.org/maven2/")
     maven("https://oss.sonatype.org/content/repositories/snapshots/")
     maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+    maven("https://jitpack.io/")
 }
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("reflect"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
+    implementation("com.github.noonmaru:kommand:0.3.1")
+
     compileOnly("org.spigotmc:spigot-api:1.8-R0.1-SNAPSHOT")
 }
 
@@ -29,6 +32,7 @@ tasks {
         archiveBaseName.set(project.property("pluginName").toString())
         archiveVersion.set("") // For bukkit plugin update
         archiveClassifier.set("") // Remove 'all'
+        relocate("com.github.noonmaru.kommand", "${rootProject.group}.${rootProject.name}.kommand")
     }
     create<Copy>("copyJarToDocker") {
         from(shadowJar)
