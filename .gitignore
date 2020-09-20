@@ -1,4 +1,13 @@
-# Project exclude paths
-/.gradle/
-/.idea/
-/build/
+# Intellij
+.idea/
+out/
+
+# Gradle
+.gradle
+build/
+
+# Docker
+.docker/
+
+# Bukkit
+logs/

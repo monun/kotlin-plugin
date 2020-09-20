@@ -3,9 +3,6 @@ plugins {
     id("com.github.johnrengelman.shadow") version "5.2.0"
 }
 
-group = requireNotNull(properties["pluginGroup"]) { "Group is undefined in properties" }
-version = requireNotNull(properties["pluginVersion"]) { "Version is undefined in properties" }
-
 repositories {
     maven("https://repo.maven.apache.org/maven2/")
     maven("https://oss.sonatype.org/content/repositories/snapshots/")
@@ -29,6 +26,21 @@ tasks {
         }
     }
     shadowJar {
-        archiveClassifier.set("")
+        archiveBaseName.set(project.property("pluginName").toString())
+        archiveVersion.set("") // For bukkit plugin update
+        archiveClassifier.set("") // Remove 'all'
+    }
+    create<Copy>("copyJarToDocker") {
+        from(shadowJar)
+
+        var dest = File(".docker/plugins")
+        // Copy bukkit plugin update folder
+        if (File(dest, shadowJar.get().archiveFileName.get()).exists()) dest = File(dest, "update")
+
+        into(dest)
+
+        doLast {
+            println("Copy to ${dest.path}")
+        }
     }
 }
