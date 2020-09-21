@@ -63,7 +63,6 @@ object GitHubSupport {
                 return@httpRequest inputStream.bufferedReader().use { JsonParser().parse(it) as JsonObject }
             }
             val version = json[KEY_TAG_NAME].asString
-            println("$currentVersion -> $version ${currentVersion.compareVersion(version)}")
             //현재 버전이 더 높다면
             if (currentVersion.compareVersion(version) >= 0) {
                 throw UpToDateException("Up to date")
@@ -73,10 +72,8 @@ object GitHubSupport {
             URL(downloadURL).downloadTo(dest)
             downloadURL
         }.onSuccess {
-            println("SUcCESS")
             callback?.invoke(Result.success(it))
         }.onFailure {
-            println("FAIL")
             callback?.invoke(Result.failure(it))
         }
     }
