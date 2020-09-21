@@ -63,17 +63,20 @@ object GitHubSupport {
                 return@httpRequest inputStream.bufferedReader().use { JsonParser().parse(it) as JsonObject }
             }
             val version = json[KEY_TAG_NAME].asString
+            println("$currentVersion -> $version ${currentVersion.compareVersion(version)}")
             //현재 버전이 더 높다면
-            if (currentVersion.compareVersion(version) > 0) {
-                throw IllegalArgumentException("Up to date")
+            if (currentVersion.compareVersion(version) >= 0) {
+                throw UpToDateException("Up to date")
             }
             //다운로드
             val downloadURL = json.find(KEY_BROWSER_DOWNLOAD_URL).first().asString
             URL(downloadURL).downloadTo(dest)
             downloadURL
         }.onSuccess {
+            println("SUcCESS")
             callback?.invoke(Result.success(it))
         }.onFailure {
+            println("FAIL")
             callback?.invoke(Result.failure(it))
         }
     }
