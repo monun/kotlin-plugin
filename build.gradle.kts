@@ -14,6 +14,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("reflect"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0")
     implementation("com.github.noonmaru:kommand:0.3.1")
 
     compileOnly("org.spigotmc:spigot-api:1.8-R0.1-SNAPSHOT")
