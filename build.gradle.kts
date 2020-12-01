@@ -13,8 +13,12 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("reflect"))
+
+    // kotlinx library
+    // https://kotlinlang.org/releases.html#release-details
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0")
+
     implementation("com.github.noonmaru:kommand:0.3.1")
 
     compileOnly("org.spigotmc:spigot-api:1.8-R0.1-SNAPSHOT")
@@ -33,19 +37,10 @@ tasks {
         archiveBaseName.set(project.property("pluginName").toString())
         archiveVersion.set("") // For bukkit plugin update
         archiveClassifier.set("") // Remove 'all'
+
         relocate("com.github.noonmaru.kommand", "${rootProject.group}.${rootProject.name}.kommand")
     }
-    create<Copy>("copyJarToDocker") {
-        from(shadowJar)
-
-        var dest = File(".docker/plugins")
-        // Copy bukkit plugin update folder
-        if (File(dest, shadowJar.get().archiveFileName.get()).exists()) dest = File(dest, "update")
-
-        into(dest)
-
-        doLast {
-            println("Copy to ${dest.path}")
-        }
+    build {
+        dependsOn(shadowJar)
     }
 }
