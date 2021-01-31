@@ -28,7 +28,7 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.github.noonmaru.kotlin.util
+package com.github.monun.kotlin.util
 
 import java.util.*
 

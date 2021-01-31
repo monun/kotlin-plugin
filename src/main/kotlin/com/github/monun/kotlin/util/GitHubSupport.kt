@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.noonmaru.kotlin.util
+package com.github.monun.kotlin.util
 
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
@@ -32,7 +32,6 @@ object GitHubSupport {
     private const val KEY_NAME = "name"
     private const val KEY_TAG_NAME = "tag_name"
     private const val KEY_BROWSER_DOWNLOAD_URL = "browser_download_url"
-
     private const val REQUEST_ACCEPT = "application/vnd.github.v3+json"
 
     /**

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.noonmaru.kotlin.util
+package com.github.monun.kotlin.util
 
 import kotlin.math.max
 
