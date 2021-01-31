@@ -18,7 +18,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
 
-    implementation("com.github.noonmaru:kommand:0.3.1")
+    implementation("com.github.monun:kommand:0.7.0")
 
     compileOnly("org.spigotmc:spigot-api:1.8-R0.1-SNAPSHOT")
 }
@@ -37,7 +37,7 @@ tasks {
         archiveVersion.set("") // For bukkit plugin update
         archiveClassifier.set("") // Remove 'all'
 
-        relocate("com.github.noonmaru.kommand", "${rootProject.group}.${rootProject.name}.kommand")
+        relocate("com.github.monun.kommand", "${rootProject.group}.${rootProject.name}.kommand")
     }
     build {
         dependsOn(shadowJar)
