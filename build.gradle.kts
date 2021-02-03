@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.4.21"
+    kotlin("jvm") version "1.4.30"
     id("com.github.johnrengelman.shadow") version "5.2.0"
 }
 
@@ -16,7 +16,7 @@ dependencies {
 
     // https://kotlinlang.org/releases.html#release-details
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
 
     implementation("com.github.monun:kommand:0.7.0")
 
