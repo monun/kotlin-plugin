@@ -15,7 +15,7 @@ dependencies {
     implementation(kotlin("reflect"))
 
     // https://kotlinlang.org/releases.html#release-details
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0-RC")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
 
     implementation("com.github.monun:kommand:0.7.0")
