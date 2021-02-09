@@ -1,45 +1,56 @@
 plugins {
-    kotlin("jvm") version "1.4.30"
+    java
     id("com.github.johnrengelman.shadow") version "5.2.0"
 }
 
-repositories {
-    maven("https://repo.maven.apache.org/maven2/")
-    maven("https://oss.sonatype.org/content/repositories/snapshots/")
-    maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
-    maven("https://jitpack.io/")
-}
+subprojects {
+    apply(plugin = "java")
+    if (name == "entrypoint") return@subprojects
+    apply(plugin = "com.github.johnrengelman.shadow")
 
-dependencies {
-    implementation(kotlin("stdlib"))
-    implementation(kotlin("reflect"))
+    version = name.substring(1) // v 접두사 제거
 
-    // https://kotlinlang.org/releases.html#release-details
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0-RC")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
+    repositories {
+        mavenCentral()
+        maven(url = "https://papermc.io/repo/repository/maven-public/")
+    }
 
-    implementation("com.github.monun:kommand:0.7.0")
+    dependencies {
+        implementation(project(":entrypoint"))
+    }
 
-    compileOnly("org.spigotmc:spigot-api:1.8-R0.1-SNAPSHOT")
+    tasks {
+        processResources {
+            filesMatching("**/*.yml") {
+                expand(project.properties)
+            }
+        }
+        shadowJar {
+            archiveBaseName.set("Kotlin")
+            // Remove 'all' classifier
+            archiveClassifier.set("")
+            append("plugin.yml")
+        }
+        create<Copy>("upstream") {
+            from(shadowJar)
+            into(File(rootProject.buildDir, "libs"))
+        }
+        build {
+            dependsOn(named("upstream"))
+        }
+    }
+
+    sourceSets {
+        main {
+            resources {
+                srcDirs(File(rootDir, "common"))
+            }
+        }
+    }
 }
 
 tasks {
-    compileKotlin {
-        kotlinOptions.jvmTarget = "11"
-    }
-    processResources {
-        filesMatching("**/*.yml") {
-            expand(project.properties)
-        }
-    }
-    shadowJar {
-        archiveBaseName.set(project.property("pluginName").toString())
-        archiveVersion.set("") // For bukkit plugin update
-        archiveClassifier.set("") // Remove 'all'
-
-        relocate("com.github.monun.kommand", "${rootProject.group}.${rootProject.name}.kommand")
-    }
-    build {
-        dependsOn(shadowJar)
+    all {
+        onlyIf { it == clean.get() }
     }
 }
