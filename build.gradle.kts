@@ -12,7 +12,7 @@ subprojects {
     version = name.substring(1) // v 접두사 제거
 
     repositories {
-        mavenCentral()
+        jcenter()
         maven(url = "https://papermc.io/repo/repository/maven-public/")
     }
 
