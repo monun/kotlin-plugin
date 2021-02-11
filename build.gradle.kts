@@ -6,6 +6,7 @@ plugins {
 subprojects {
     apply(plugin = "java")
     if (name == "entrypoint") return@subprojects
+
     apply(plugin = "com.github.johnrengelman.shadow")
 
     version = name.substring(1) // v 접두사 제거
@@ -20,6 +21,10 @@ subprojects {
     }
 
     tasks {
+        withType(JavaCompile::class) {
+            sourceCompatibility = "11"
+            targetCompatibility = "11"
+        }
         processResources {
             filesMatching("**/*.yml") {
                 expand(project.properties)
