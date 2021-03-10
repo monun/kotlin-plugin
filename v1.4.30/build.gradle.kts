@@ -7,6 +7,10 @@ dependencies {
     implementation(kotlin("reflect"))
     implementation(kotlinx("kotlinx-serialization-json", "1.1.0-RC"))
     implementation(kotlinx("kotlinx-coroutines-core", "1.4.2"))
+    val exposedVersion = "0.29.1"
+    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
 }
 
 fun kotlinx(module: String, version: String): String {
