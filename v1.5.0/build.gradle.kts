@@ -1,12 +1,12 @@
 plugins {
-    kotlin("jvm") version "1.4.32"
+    kotlin("jvm") version "1.5.0"
 }
 
 dependencies {
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
-    implementation(kotlinx("kotlinx-serialization-json", "1.1.0"))
-    implementation(kotlinx("kotlinx-coroutines-core", "1.4.3"))
+    implementation(kotlinx("kotlinx-serialization-json", "1.2.0"))
+    implementation(kotlinx("kotlinx-coroutines-core", "1.5.0-RC"))
     val exposedVersion = "0.31.1"
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
