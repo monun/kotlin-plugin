@@ -5,6 +5,14 @@ plugins {
 
 subprojects {
     apply(plugin = "java")
+
+    tasks {
+        withType(JavaCompile::class) {
+            sourceCompatibility = "1.8"
+            targetCompatibility = "1.8"
+        }
+    }
+
     if (name == "entrypoint") return@subprojects
 
     apply(plugin = "com.github.johnrengelman.shadow")
@@ -21,10 +29,6 @@ subprojects {
     }
 
     tasks {
-        withType(JavaCompile::class) {
-            sourceCompatibility = "11"
-            targetCompatibility = "11"
-        }
         processResources {
             filesMatching("**/*.yml") {
                 expand(project.properties)
