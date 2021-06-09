@@ -8,5 +8,3 @@
 depend: [kotlin]
 ...
 ```
-
-**JDK 11**
