@@ -5,6 +5,6 @@
 **Write the following in *plugin.yml* file.**
 ```yaml
 ...
-depend: [kotlin]
+depend: [Kotlin]
 ...
 ```
